@@ -88,7 +88,8 @@ void sendUdp(int flag) {
   udp.write(dt, sizeof(dt));
   udp.endPacket();
 
-  udp.beginPacket(ipadrs, localPort);
+  if (!flag) udp.beginPacket(ipadrs, localPort);
+  else       udp.beginPacket(broadcast, localPort);
   memset(_buf, c, sizeof(_buf));
   udp.write(_buf, sizeof(_buf));
   udp.endPacket();
